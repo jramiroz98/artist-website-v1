@@ -1,3 +1,21 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background-color: #080808;
+	color: #ffffff;
+	font-family: 'Montserrat', sans-serif;
+	overflow-x: hidden;
+}

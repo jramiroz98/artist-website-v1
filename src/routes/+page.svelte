@@ -1,334 +1,409 @@
-<script>
-	import Heading from '$lib/components/Heading.svelte';
-	import Song from '$lib/components/Song.svelte';
+<script lang="ts">
 	import { fade } from 'svelte/transition';
+	import { artist } from '$lib/artist.config';
+	import Song from '$lib/components/Song.svelte';
+	import Heading from '$lib/components/Heading.svelte';
 
-	let visible = false;
-	setTimeout(function() {
-		visible = true;
-	}, 500);
+	let heroVisible = $state(false);
+	$effect(() => {
+		setTimeout(() => {
+			heroVisible = true;
+		}, 350);
+	});
 </script>
 
-<div class="welcome">
-	{#if visible}
-		<img transition:fade class="logo" src="https://koalamcg.com/images/white-logo.png" alt="logo" />
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- HERO                                                                   -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<section id="hero" style="background-image: url({artist.heroBackground})">
+	<div class="hero-overlay"></div>
+
+	{#if heroVisible}
+		<div class="hero-logo-wrap" transition:fade={{ duration: 900 }}>
+			<img src={artist.logo} alt={artist.name} class="hero-logo" />
+		</div>
 	{/if}
-	<div class="flex justify-center relative -bottom-60">
-		<img class="scroll-icn bounce-1"
-				 src="https://koalamcg.com/images/icons/scroll.png"
-				 alt="scroll down" />
+
+	<div class="hero-content">
+		<p class="hero-genre">{artist.genre}</p>
+		<h1 class="hero-name">{artist.name.toUpperCase()}</h1>
+		<p class="hero-tagline">{artist.tagline.toUpperCase()}</p>
 	</div>
-</div>
-<div class="music bg-black py-20">
-	<Heading title="music" />
-	<div class="songs md:flex md:flex-wrap my-12 justify-center relative">
-		<Song
-			image="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/5c/19/43/5c194395-528a-3e82-b194-a4712542f1b7/artwork.jpg/632x632bb.webp"
-			title="Hotsteppa"
-			spotify="https://open.spotify.com/album/6FgUvBOEuXMW77kSjrJeit"
-			amazon="https://www.amazon.es/Hotsteppa-Radio-Edit/dp/B0CTGKVXXH"
-			youtube="https://www.youtube.com/watch?v=0tVeSPqLsFE"
-			apple="https://music.apple.com/gb/album/hotsteppa-radio-edit-single/1728621384"
-		/>
-		<Song
-			image="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/5c/19/43/5c194395-528a-3e82-b194-a4712542f1b7/artwork.jpg/632x632bb.webp"
-			title="Hotsteppa"
-			spotify="https://open.spotify.com/album/6FgUvBOEuXMW77kSjrJeit"
-			amazon="https://www.amazon.es/Hotsteppa-Radio-Edit/dp/B0CTGKVXXH"
-			youtube="https://www.youtube.com/watch?v=0tVeSPqLsFE"
-			apple="https://music.apple.com/gb/album/hotsteppa-radio-edit-single/1728621384"
-		/>
-		<Song
-			image="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/5c/19/43/5c194395-528a-3e82-b194-a4712542f1b7/artwork.jpg/632x632bb.webp"
-			title="Hotsteppa"
-			spotify="https://open.spotify.com/album/6FgUvBOEuXMW77kSjrJeit"
-			amazon="https://www.amazon.es/Hotsteppa-Radio-Edit/dp/B0CTGKVXXH"
-			youtube="https://www.youtube.com/watch?v=0tVeSPqLsFE"
-			apple="https://music.apple.com/gb/album/hotsteppa-radio-edit-single/1728621384"
-		/>
-		<Song
-			image="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/5c/19/43/5c194395-528a-3e82-b194-a4712542f1b7/artwork.jpg/632x632bb.webp"
-			title="Hotsteppa"
-			spotify="https://open.spotify.com/album/6FgUvBOEuXMW77kSjrJeit"
-			amazon="https://www.amazon.es/Hotsteppa-Radio-Edit/dp/B0CTGKVXXH"
-			youtube="https://www.youtube.com/watch?v=0tVeSPqLsFE"
-			apple="https://music.apple.com/gb/album/hotsteppa-radio-edit-single/1728621384"
-		/>
-		<Song
-			image="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/5c/19/43/5c194395-528a-3e82-b194-a4712542f1b7/artwork.jpg/632x632bb.webp"
-			title="Hotsteppa"
-			spotify="https://open.spotify.com/album/6FgUvBOEuXMW77kSjrJeit"
-			amazon="https://www.amazon.es/Hotsteppa-Radio-Edit/dp/B0CTGKVXXH"
-			youtube="https://www.youtube.com/watch?v=0tVeSPqLsFE"
-			apple="https://music.apple.com/gb/album/hotsteppa-radio-edit-single/1728621384"
-		/>
-		<Song
-			image="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/5c/19/43/5c194395-528a-3e82-b194-a4712542f1b7/artwork.jpg/632x632bb.webp"
-			title="Hotsteppa"
-			spotify="https://open.spotify.com/album/6FgUvBOEuXMW77kSjrJeit"
-			amazon="https://www.amazon.es/Hotsteppa-Radio-Edit/dp/B0CTGKVXXH"
-			youtube="https://www.youtube.com/watch?v=0tVeSPqLsFE"
-			apple="https://music.apple.com/gb/album/hotsteppa-radio-edit-single/1728621384"
-		/>
 
+	<div class="scroll-hint">
+		<span class="scroll-line"></span>
+		<span class="scroll-text">SCROLL</span>
 	</div>
-</div>
+</section>
 
-<div class="youtube bg-blue-950 py-20 ">
-	<Heading title="Youtube" />
-	<div class="flex flex-col space-y-6 justify-center items-center py-8">
-		<iframe
-			class="w-[22rem] h-[15rem]"
-			src="https://www.youtube.com/embed/d-dvuFZeNAQ?si=wZhEA_qT8puJrIvq&amp;controls=0"
-			title="YouTube video player"
-			frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-			allowfullscreen
-		/>
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- MUSIC                                                                  -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<section id="music" class="section">
+	<div class="section-inner">
+		<Heading title="Releases" />
+		<div class="releases-grid">
+			{#each artist.releases as release, i (i)}
+				<Song
+					image={release.image}
+					title={release.title}
+					year={release.year}
+					spotify={release.spotify}
+					apple={release.apple}
+					amazon={release.amazon}
+					youtube={release.youtube}
+				/>
+			{/each}
+		</div>
 	</div>
-</div>
+</section>
 
-
-<div class="bg-black py-8">
-	<Heading title="Biografia" />
-	<div class="text-white px-2 text-center">
-		<!-- <img src="/images/songs/smyl.png" style="width: 30%;" alt="" /> -->
-		<p>
-			Koala McGiver es un Dj y Productor Hondureño. Con más de 7 años de experiencia en producción
-			musical, presenta música de alta calidad y un gusto muy variado. Los Dj Sets son movidos y
-			para un publico alegre y cálido. Sus producciones han sido reproducidas por DJs alrededor del
-			mundo, así como unreleased mashups y remixes.
-		</p>
-		<br />
-		<p>
-			Cabe mencionar que dentro de otros talentos se destacan sus animaciones y renderizados en 3D,
-			las cuales se utilizan en algunas de sus presentaciones.
-		</p>
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- VIDEOS                                                                 -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<section id="videos" class="section section-parallax" style="background-image: url({artist.videoBg})">
+	<div class="parallax-overlay"></div>
+	<div class="section-inner section-inner--relative">
+		<Heading title="Videos" />
+		<div class="videos-grid">
+			{#each artist.videos as video (video.embedId)}
+				<div class="video-frame">
+					<iframe
+						src="https://www.youtube.com/embed/{video.embedId}?controls=1"
+						title={video.title}
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen
+					></iframe>
+				</div>
+			{/each}
+		</div>
 	</div>
-</div>
+</section>
 
-<div class="contact bg-black">
-	<Heading title="Bookings" />
-	<a style="text-decoration: none; color: white;" href="mailto:koalamcgiver98@gmail.com">
-		<p class="email">koalamcgiver98@gmail.com</p>
-	</a>
-	<div class="social-media">
-		<a target="_blank" rel="noopener" href="https://www.instagram.com/koalamcg_98/?hl=en">
-			<img class="social-icn" src="/images/icons/instagram.png" alt="instagram" />
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ABOUT                                                                  -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<section id="about" class="section">
+	<div class="section-inner section-inner--narrow">
+		<Heading title="About" />
+		<div class="bio">
+			{#each artist.bio as paragraph, i (i)}
+				<p>{paragraph}</p>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- BOOKINGS                                                               -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<section id="bookings" class="section section-bookings">
+	<div class="section-inner">
+		<Heading title="Bookings" />
+		<a href="mailto:{artist.bookingEmail}" class="booking-email">
+			{artist.bookingEmail}
 		</a>
-		<a target="_blank" rel="noopener" href="https://www.youtube.com/@koalamcgiver/featured">
-			<img class="social-icn" src="/images/icons/youtube.png" alt="youtube" />
-		</a>
-		<a
-			target="_blank"
-			rel="noopener"
-			href="https://open.spotify.com/artist/73nBtoghfH7KJK53JgiAwl?si=lagp8aSqQkOEGjDJH_1Lyw"
-		>
-			<img class="social-icn" src="/images/icons/spotify-256.png" alt="spotify" />
-		</a>
-		<a
-			target="_blank"
-			rel="noopener"
-			href="https://music.apple.com/us/artist/koala-mcgiver/1534748006"
-		>
-			<img class="social-icn" src="/images/icons/apple-music.png" alt="apple music" />
-		</a>
+		<div class="socials">
+			{#if artist.social.instagram}
+				<a target="_blank" rel="noopener" href={artist.social.instagram} class="social-link">
+					<img src="/images/icons/instagram.png" alt="Instagram" />
+				</a>
+			{/if}
+			{#if artist.social.youtube}
+				<a target="_blank" rel="noopener" href={artist.social.youtube} class="social-link">
+					<img src="/images/icons/youtube.png" alt="YouTube" />
+				</a>
+			{/if}
+			{#if artist.social.spotify}
+				<a target="_blank" rel="noopener" href={artist.social.spotify} class="social-link">
+					<img src="/images/icons/spotify-256.png" alt="Spotify" />
+				</a>
+			{/if}
+			{#if artist.social.appleMusic}
+				<a target="_blank" rel="noopener" href={artist.social.appleMusic} class="social-link">
+					<img src="/images/icons/apple-music.png" alt="Apple Music" />
+				</a>
+			{/if}
+		</div>
 	</div>
-</div>
+
+	<footer class="site-footer">
+		<p>© {new Date().getFullYear()} {artist.name}. All rights reserved.</p>
+	</footer>
+</section>
 
 <style>
-    .logo {
-        width: 15rem;
-        display: flex;
-        /* justify-content: center; */
-        text-align: center;
-        margin: auto;
-        padding-top: 35vh;
-    }
+	/* ─── Hero ──────────────────────────────────────────────────────────── */
+	#hero {
+		position: relative;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		overflow: hidden;
+	}
 
-    /*iframe {*/
-    /*    width: 15rem;*/
-    /*    height: auto;*/
-    /*}*/
+	.hero-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to bottom,
+			rgba(0, 0, 0, 0.4) 0%,
+			rgba(0, 0, 0, 0.15) 35%,
+			rgba(0, 0, 0, 0.65) 80%,
+			rgba(8, 8, 8, 1) 100%
+		);
+	}
 
-    .bounce-1 {
-        animation-name: bounce-1;
-        animation-timing-function: ease;
-    }
+	.hero-logo-wrap {
+		position: absolute;
+		top: 5.5rem;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 2;
+	}
 
-    @keyframes bounce-1 {
-        0% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: scale(1.05) translateY(-20px);
-        }
+	.hero-logo {
+		height: 3rem;
+		width: auto;
+	}
 
-        100% {
-            transform: translateY(0);
-        }
-    }
+	.hero-content {
+		position: relative;
+		z-index: 2;
+		text-align: center;
+		padding: 0 1.5rem;
+		pointer-events: none;
+	}
 
-    .scroll-icn {
-        animation-duration: 1.5s;
-        animation-iteration-count: infinite;
-        width: 2rem;
-        /*position: absolute;*/
-        /*bottom: 3rem;*/
-        /*left: 46%;*/
-    }
+	.hero-genre {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.32em;
+		color: #00d4ff;
+		text-transform: uppercase;
+		margin: 0 0 0.9rem;
+	}
 
-    .youtube {
-        background-image: url('/images/logo-bg.jpg');
-        min-height: 100vh;
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+	.hero-name {
+		font-family: 'Bebas Neue', cursive;
+		font-size: clamp(4rem, 13vw, 9.5rem);
+		line-height: 0.88;
+		color: white;
+		margin: 0;
+		letter-spacing: 0.04em;
+	}
 
-    .set-img {
-        width: 15rem;
-        /* width: 30rem; */
-        /* padding: 10rem 5rem; */
-        padding: 1rem 0rem;
-        margin: auto;
-    }
+	.hero-tagline {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 0.68rem;
+		font-weight: 400;
+		letter-spacing: 0.3em;
+		color: rgba(255, 255, 255, 0.5);
+		margin: 1.1rem 0 0;
+	}
 
-    .sets {
-        /* display: flex; */
-        display: block;
-        justify-content: center;
-        text-align: center;
-        margin-bottom: 6rem;
-    }
+	.scroll-hint {
+		position: absolute;
+		bottom: 2.5rem;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 2;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		animation: float 2.2s ease-in-out infinite;
+	}
 
-    .welcome {
-        background: url('https://images.unsplash.com/photo-1763688506750-0da09fe27324?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-        min-height: 100vh;
-        background-attachment: fixed;
-        background-attachment: scroll;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-    }
+	.scroll-line {
+		display: block;
+		width: 1px;
+		height: 38px;
+		background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.5));
+	}
 
-    .social-icn {
-        width: 3rem;
-        height: 100%;
-        margin: 2rem 1rem;
-        transition: 0.2s;
-    }
+	.scroll-text {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 0.52rem;
+		letter-spacing: 0.28em;
+		color: rgba(255, 255, 255, 0.4);
+		text-transform: uppercase;
+	}
 
-    .social-icn:hover {
-        transform: scale(1.1);
-    }
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateX(-50%) translateY(0);
+		}
+		50% {
+			transform: translateX(-50%) translateY(9px);
+		}
+	}
 
-    .social-media {
-        display: flex;
-        /* display: flex; */
-        justify-content: center;
-        align-items: center;
-        padding-bottom: 10rem;
-    }
+	/* ─── Sections ──────────────────────────────────────────────────────── */
+	.section {
+		background-color: #080808;
+		padding: 6rem 0;
+	}
 
-    .email {
-        margin: 1rem;
-        font-size: 0.8rem;
-    }
+	.section-parallax {
+		position: relative;
+		background-color: transparent;
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+	}
 
-    .contact {
-        color: white;
-        font-family: 'Poppins', sans-serif;
-        margin: auto;
-        text-align: center;
-    }
+	.parallax-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.78);
+	}
 
-    .bio {
-        font-family: 'Poppins', sans-serif;
-        background-color: rgb(27, 27, 27);
-        text-align: center;
-        margin-top: 1rem;
-        margin-bottom: 6rem;
+	.section-inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1.5rem;
+	}
 
-        padding: 1rem 2rem;
-        /* padding: 8rem 2rem; */
-        display: block;
-        color: white;
-    }
+	.section-inner--relative {
+		position: relative;
+		z-index: 1;
+	}
 
-    .embedded {
-        margin: 1rem auto;
-        text-align: center;
-        padding: 1rem 0;
-        /* padding: 5rem 0; */
-    }
+	.section-inner--narrow {
+		max-width: 760px;
+	}
 
-    /*.songs {*/
-    /*    !* display: flex; *!*/
-    /*    text-align: center;*/
-    /*    justify-content: center;*/
-    /*    margin: 4rem auto;*/
-    /*}*/
+	/* ─── Releases grid ──────────────────────────────────────────────────── */
+	.releases-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+		margin-top: 3rem;
+	}
 
-    @media only screen and (min-width: 700px) {
-        .logo {
-            width: 24rem;
-        }
+	@media (min-width: 540px) {
+		.releases-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1.25rem;
+		}
+	}
 
-        /*iframe {*/
-        /*    width: 22rem;*/
-        /*    height: 100%;*/
-        /*}*/
-        .youtube {
-            min-height: 50vh;
-        }
+	@media (min-width: 900px) {
+		.releases-grid {
+			grid-template-columns: repeat(4, 1fr);
+			gap: 1.75rem;
+		}
+	}
 
-        .set-img {
-            /* display: flex; */
-            width: 20rem;
-            padding: 5rem 1rem;
-        }
+	@media (min-width: 1200px) {
+		.releases-grid {
+			grid-template-columns: repeat(6, 1fr);
+			gap: 1.5rem;
+		}
+	}
 
-        .email {
-            font-size: 1.5rem;
-            margin: 3rem;
-        }
+	/* ─── Videos ─────────────────────────────────────────────────────────── */
+	.videos-grid {
+		margin-top: 3rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr));
+		gap: 1.5rem;
+		justify-items: center;
+	}
 
-        .social-icn {
-            width: 4rem;
-            margin: 2rem 3rem;
-        }
-    }
+	.video-frame {
+		width: 100%;
+		max-width: 700px;
+		aspect-ratio: 16 / 9;
+	}
 
-    @media only screen and (min-width: 1000px) {
-        /*.songs {*/
-        /*    display: flex;*/
-        /*    flex-wrap: wrap;*/
-        /*    margin: 4rem 10rem;*/
-        /*}*/
-        /*iframe {*/
-        /*    width: 30rem;*/
-        /*    height: 15rem;*/
-        /*}*/
-        .set-img {
-            width: 30rem;
-        }
+	.video-frame iframe {
+		width: 100%;
+		height: 100%;
+		border-radius: 6px;
+		display: block;
+	}
 
-        .bio {
-            padding: 8rem 20rem;
-        }
+	/* ─── Bio ────────────────────────────────────────────────────────────── */
+	.bio {
+		margin-top: 2.5rem;
+		text-align: center;
+	}
 
-        .email {
-            margin: 5rem;
-            font-size: 2rem;
-        }
+	.bio p {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 0.95rem;
+		font-weight: 400;
+		line-height: 1.95;
+		color: rgba(255, 255, 255, 0.65);
+		margin-bottom: 1.25rem;
+	}
 
-        .social-icn {
-            width: 5rem;
-        }
-    }
+	/* ─── Bookings ───────────────────────────────────────────────────────── */
+	.section-bookings {
+		padding-bottom: 0;
+	}
+
+	.booking-email {
+		display: block;
+		font-family: 'Montserrat', sans-serif;
+		font-size: clamp(0.8rem, 2.2vw, 1.2rem);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: white;
+		text-decoration: none;
+		text-align: center;
+		margin-top: 2rem;
+		transition: color 0.2s;
+	}
+
+	.booking-email:hover {
+		color: #00d4ff;
+	}
+
+	.socials {
+		display: flex;
+		justify-content: center;
+		gap: 1.75rem;
+		margin-top: 3rem;
+		padding-bottom: 5rem;
+	}
+
+	.social-link img {
+		width: 2.2rem;
+		height: 2.2rem;
+		object-fit: contain;
+		opacity: 0.7;
+		transition:
+			opacity 0.2s,
+			transform 0.2s;
+	}
+
+	.social-link:hover img {
+		opacity: 1;
+		transform: scale(1.18);
+	}
+
+	/* ─── Footer ─────────────────────────────────────────────────────────── */
+	.site-footer {
+		border-top: 1px solid rgba(255, 255, 255, 0.07);
+		padding: 1.5rem;
+		text-align: center;
+	}
+
+	.site-footer p {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 0.65rem;
+		letter-spacing: 0.12em;
+		color: rgba(255, 255, 255, 0.2);
+		margin: 0;
+	}
 </style>
